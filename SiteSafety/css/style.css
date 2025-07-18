@@ -1,0 +1,55 @@
+/* style.css */
+
+/* General */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
+}
+.container { max-width: 1200px; }
+
+/* Login page */
+.login-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #0d6efd, #6610f2);
+}
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 360px;
+}
+
+/* Info cards */
+.info-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.info-card h5 {
+  font-size: 1.1rem;
+}
+.info-card p {
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* Map styling */
+#map { height: 350px; border-radius: 8px; }
+
+/* Navbar gradient */
+.bg-gradient {
+  background: linear-gradient(to right, #0d6efd, #6610f2);
+}
+
+/* Disable list-group border overlaps */
+.list-group-item {
+  border: none;
+  background: white;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}

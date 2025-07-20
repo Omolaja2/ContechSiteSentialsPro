@@ -15,71 +15,43 @@
   <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet" />
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      background-color: #f8f9fa;
-    }
+    html { scroll-behavior: smooth; }
+    body { background-color: #f8f9fa; }
     .floating-nav {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 9999;
+      position: fixed; top: 20px; right: 20px; z-index: 9999;
     }
-    .floating-nav button, .floating-nav a {
-      margin-bottom: 10px;
-    }
+    .floating-nav button, .floating-nav a { margin-bottom: 10px; }
     .profile-icon {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 9999;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      position: fixed; top: 20px; left: 20px; z-index: 9999;
+      width: 40px; height: 40px; border-radius: 50%;
       background: url('https://img.icons8.com/ios-filled/50/user-male-circle.png') no-repeat center center / cover;
     }
     .alert-login {
-      position: fixed;
-      top: 70px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
+      position: fixed; top: 70px; left: 50%;
+      transform: translateX(-50%); z-index: 9999;
       display: none;
     }
-    section {
-      padding: 80px 20px;
-    }
+    section { padding: 80px 20px; }
     .hero {
       background: linear-gradient(to right, #00416a, #e4e5e6);
-      color: white;
-      padding: 100px 20px;
-      text-align: center;
+      color: white; padding: 100px 20px; text-align: center;
     }
-    .chart-container {
-      width: 100%;
-      height: 300px;
-    }
+    .chart-container { width: 100%; height: 300px; }
     footer {
       background-color: #343a40;
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
+      color: white; padding: 30px 20px; text-align: center;
     }
+    .cert-badge { font-size: 12px; margin-top: 4px; display: inline-block; }
+    .mobile-mockup { max-width: 250px; }
   </style>
 </head>
 <body>
 
-<!-- Profile Icon -->
 <div class="profile-icon" title="Admin Profile"></div>
-
-<!-- Login Success Alert -->
 <div class="alert alert-success alert-login shadow text-center" id="loginAlert" role="alert">
   ✅ Login Successful! Welcome back, Admin.
 </div>
 
-<!-- Floating Buttons -->
 <div class="floating-nav d-flex flex-column">
   <button onclick="toggleDarkMode()" class="btn btn-dark">🌓 Dark Mode</button>
   <a href="#about" class="btn btn-outline-primary">About</a>
@@ -87,13 +59,11 @@
   <a href="#" class="btn btn-danger" onclick="alert('Logging out...')">Logout</a>
 </div>
 
-<!-- Hero -->
 <section class="hero" data-aos="fade-down">
   <h1 class="display-4">Smart Safety Dashboard</h1>
   <p class="lead">Real-time insights into worker safety, device activity, and emergency response.</p>
 </section>
 
-<!-- Device Overview -->
 <section id="devices" class="container" data-aos="fade-up">
   <h2 class="mb-4">Device Overview</h2>
   <div class="row text-center">
@@ -103,19 +73,34 @@
   </div>
 </section>
 
-<!-- Worker Status -->
 <section id="worker-status" class="bg-light" data-aos="fade-up">
   <div class="container">
     <h2 class="mb-4">Worker Status</h2>
     <div class="row g-3 text-center">
-      <div class="col-md-3"><div class="card p-3">Ali <br><span class="badge bg-success">Online</span></div></div>
-      <div class="col-md-3"><div class="card p-3">John <br><span class="badge bg-danger">Offline</span></div></div>
-      <div class="col-md-3"><div class="card p-3">Fatima <br><span class="badge bg-success">Online</span></div></div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          Ali <br><span class="badge bg-success">Online</span><br>
+          <span class="badge bg-info cert-badge">✅ Certified</span><br>
+          <button class="btn btn-sm btn-danger mt-2" onclick="alert('Panic alert sent for Ali')">🚨 Panic</button>
+          <span class="badge bg-warning mt-1">⚠️ Fatigue Risk</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          John <br><span class="badge bg-danger">Offline</span><br>
+          <span class="badge bg-secondary cert-badge">Not Certified</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          Fatima <br><span class="badge bg-success">Online</span><br>
+          <span class="badge bg-info cert-badge">✅ Certified</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Live Alerts -->
 <section id="alerts" class="container" data-aos="fade-left">
   <h2 class="mb-4">Live Alerts</h2>
   <ul class="list-group">
@@ -125,7 +110,6 @@
   </ul>
 </section>
 
-<!-- Environmental Data -->
 <section class="bg-light" data-aos="fade-right">
   <div class="container">
     <h2 class="mb-4">Environmental Data</h2>
@@ -137,15 +121,14 @@
   </div>
 </section>
 
-<!-- Heatmap -->
 <section data-aos="zoom-in">
   <div class="container">
-    <h2 class="mb-4">Heatmap Overlay</h2>
+    <h2 class="mb-4">Heatmap + Geofencing</h2>
     <div id="map" style="height: 400px;"></div>
+    <p class="mt-2 text-danger">🔒 Red boundary marks secure zone. Alert triggered if worker/device leaves.</p>
   </div>
 </section>
 
-<!-- Analytics Report -->
 <section class="bg-light" data-aos="fade-up">
   <div class="container">
     <h2 class="mb-4">Analytics Report</h2>
@@ -155,21 +138,17 @@
   </div>
 </section>
 
-<!-- Worker Feedback -->
 <section data-aos="fade-up-right">
   <div class="container">
     <h2 class="mb-4">Worker Feedback</h2>
     <form onsubmit="submitFeedback(event)">
-      <div class="mb-3">
-        <input class="form-control" id="feedbackInput" placeholder="Your concern..." required>
-      </div>
+      <div class="mb-3"><input class="form-control" id="feedbackInput" placeholder="Your concern..." required></div>
       <button class="btn btn-primary">Submit</button>
     </form>
     <ul class="list-group mt-3" id="feedbackList"></ul>
   </div>
 </section>
 
-<!-- Safety Checklist -->
 <section class="bg-light" data-aos="fade-up-left">
   <div class="container">
     <h2 class="mb-4">Safety Checklist</h2>
@@ -184,7 +163,6 @@
   </div>
 </section>
 
-<!-- Emergency -->
 <section class="text-center" data-aos="zoom-in-up">
   <div class="container">
     <h2 class="mb-4">Emergency</h2>
@@ -193,7 +171,14 @@
   </div>
 </section>
 
-<!-- About Section -->
+<section class="bg-light text-center" data-aos="fade-up">
+  <div class="container">
+    <h2 class="mb-4">📱 Mobile App Companion</h2>
+    <img src="https://img.icons8.com/ios-filled/100/000000/smartphone-tablet.png" class="mobile-mockup mb-3"/>
+    <p>Manage alerts, check-in, and monitor status on the go with the mobile app version of this dashboard.</p>
+  </div>
+</section>
+
 <section id="about" class="bg-light" data-aos="fade-up">
   <div class="container">
     <h2 class="mb-4">About</h2>
@@ -201,151 +186,20 @@
   </div>
 </section>
 
-<!-- Contact Section -->
 <section id="contact" data-aos="fade-up">
   <div class="container">
     <h2 class="mb-4">Contact Us</h2>
     <form onsubmit="event.preventDefault(); alert('Message sent!');">
-      <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Your Name" required />
-      </div>
-      <div class="mb-3">
-        <input type="email" class="form-control" placeholder="Your Email" required />
-      </div>
-      <div class="mb-3">
-        <textarea class="form-control" placeholder="Message" rows="4" required></textarea>
-      </div>
+      <div class="mb-3"><input type="text" class="form-control" placeholder="Your Name" required /></div>
+      <div class="mb-3"><input type="email" class="form-control" placeholder="Your Email" required /></div>
+      <div class="mb-3"><textarea class="form-control" placeholder="Message" rows="4" required></textarea></div>
       <button class="btn btn-primary">Send Message</button>
     </form>
   </div>
 </section>
 
-<!-- INSERT THIS AFTER Heatmap OR WHERE YOU WANT FEATURES TO APPEAR -->
-<section class="bg-danger text-white text-center" id="emergency-simulation">
-  <div class="container">
-    <h2>🚨 Emergency Simulation</h2>
-    <p>Trigger an emergency scenario to test site readiness.</p>
-    <button id="triggerEmergencyNew" class="btn btn-light">Simulate Emergency</button>
-    <div id="emergencyVisual" class="mt-3" style="display:none;">
-      <h4>🔴 Emergency Triggered!</h4>
-      <p>Siren sounding... All units alerted!</p>
-    </div>
-  </div>
-</section>
+<footer><p>&copy; 2025 Smart Safety Dashboard. All rights reserved.</p></footer>
 
-<section class="bg-light" id="weather-aqi">
-  <div class="container text-center">
-    <h2>🌦️ Weather & Air Quality</h2>
-    <div class="row g-3">
-      <div class="col-md-4"><div class="card p-3"><h4 id="temp">--°C</h4><p>Temperature</p></div></div>
-      <div class="col-md-4"><div class="card p-3"><h4 id="humidity">--%</h4><p>Humidity</p></div></div>
-      <div class="col-md-4"><div class="card p-3"><h4 id="aqi">--</h4><p>Air Quality Index</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="incident-timeline" class="container my-5">
-  <h2 class="mb-4">📍 Incident Report Timeline</h2>
-  <ul class="list-group">
-    <li class="list-group-item">🪖 Helmet removed - 10:42 AM</li>
-    <li class="list-group-item">📉 Fall detected - 11:20 AM</li>
-    <li class="list-group-item">☠️ Toxic gas alert - 12:15 PM</li>
-  </ul>
-</section>
-
-<section class="text-center my-5">
-  <h2>🔔 Smart Notification Center</h2>
-  <button class="btn btn-outline-secondary position-relative" id="bellIcon">
-    🔔
-    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
-  </button>
-  <div id="notificationDropdown" class="card mt-3 mx-auto" style="max-width: 400px; display: none;">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">⚠️ Gas Alert in Zone A</li>
-      <li class="list-group-item">🚧 Worker entered restricted area</li>
-      <li class="list-group-item">📶 Device offline in Zone B</li>
-    </ul>
-  </div>
-</section>
-
-<section id="task-panel" class="bg-light py-5">
-  <div class="container">
-    <h2 class="mb-4">📋 Task Assignment</h2>
-    <ul class="list-group">
-      <li class="list-group-item">Inspect scaffolding - ✅ Completed</li>
-      <li class="list-group-item">Check oxygen levels - 🔄 In Progress</li>
-      <li class="list-group-item">Clear debris in Zone C - ⏳ Pending</li>
-    </ul>
-  </div>
-</section>
-
-<section class="text-center my-5" id="pdf-report">
-  <h2>📄 Export Analytics</h2>
-  <p>Download dashboard metrics and charts as a PDF report.</p>
-  <button class="btn btn-success" onclick="window.print()">Download Report</button>
-</section>
-
-<section class="bg-light text-center py-5" id="voice-alert">
-  <h2>🎙️ Voice Alert Assistant</h2>
-  <p>“Warning! Worker 12 has removed helmet in Zone B.”</p>
-  <button class="btn btn-warning" onclick="playAlert()">Play Voice Alert</button>
-</section>
-
-<section class="py-5" id="site-overview">
-  <div class="container text-center">
-    <h2>📐 3D Site Overview</h2>
-    <img src="images/site-floorplan.png" class="img-fluid rounded shadow" alt="3D Floorplan" />
-    <p class="text-muted">Click markers to view device or worker info.</p>
-  </div>
-</section>
-
-<section class="bg-light py-5" id="safety-scoreboard">
-  <div class="container">
-    <h2 class="mb-4 text-center">🏆 Safety Scoreboard</h2>
-    <ol class="list-group list-group-numbered">
-      <li class="list-group-item">⭐ Worker A - 98% Safety</li>
-      <li class="list-group-item">⭐ Worker B - 94%</li>
-      <li class="list-group-item">⭐ Worker C - 91%</li>
-    </ol>
-  </div>
-</section>
-
-<script>
-  document.getElementById('triggerEmergencyNew')?.addEventListener('click', () => {
-    const visual = document.getElementById('emergencyVisual');
-    visual.style.display = 'block';
-    document.body.classList.add('bg-danger-subtle');
-    setTimeout(() => {
-      visual.style.display = 'none';
-      document.body.classList.remove('bg-danger-subtle');
-    }, 5000);
-  });
-
-  document.getElementById('bellIcon')?.addEventListener('click', () => {
-    const dropdown = document.getElementById('notificationDropdown');
-    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-  });
-
-  function playAlert() {
-    const msg = new SpeechSynthesisUtterance("Warning! Worker 12 has removed helmet in Zone B.");
-    window.speechSynthesis.speak(msg);
-  }
-
-  // Simulated data (replace with real API later)
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('temp').innerText = '31°C';
-    document.getElementById('humidity').innerText = '52%';
-    document.getElementById('aqi').innerText = 'Good (43)';
-  });
-</script>
-
-
-<!-- Footer -->
-<footer>
-  <p>&copy; 2025 Smart Safety Dashboard. All rights reserved.</p>
-</footer>
-
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -395,17 +249,12 @@
 
   const map = L.map('map').setView([6.5244, 3.3792], 13);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-  L.circle([6.5244, 3.3792], { radius: 200, color: 'red' }).addTo(map).bindPopup("High Activity Zone");
-
-  window.addEventListener("DOMContentLoaded", () => {
-    const alertBox = document.getElementById("loginAlert");
-    if (alertBox) {
-      alertBox.style.display = "block";
-      setTimeout(() => {
-        alertBox.style.display = "none";
-      }, 3000);
-    }
-  });
+  L.polygon([
+    [6.5250, 3.3780],
+    [6.5255, 3.3805],
+    [6.5238, 3.3812],
+    [6.5232, 3.3784]
+  ], {color: 'red'}).addTo(map).bindPopup("Secure Zone");
 </script>
 
 </body>

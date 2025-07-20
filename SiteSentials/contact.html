@@ -17,7 +17,6 @@
   <div class="container py-5">
     <h1 class="text-center">Contact Us</h1>
 
-    <!-- Flash Message -->
     <div id="flash-msg" class="alert alert-success text-center mt-4" role="alert">
       ✅ Message sent successfully! We'll get back to you shortly.
     </div>
@@ -39,7 +38,6 @@
     </form>
   </div>
 
-  <!-- Bootstrap JS (needed for alert animation) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const form = document.getElementById('contactForm');
@@ -48,13 +46,11 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // Show the flash message
+      
       flashMsg.style.display = 'block';
 
-      // Reset form
       form.reset();
 
-      // Auto-hide after 4 seconds
       setTimeout(() => {
         flashMsg.style.display = 'none';
       }, 4000);
